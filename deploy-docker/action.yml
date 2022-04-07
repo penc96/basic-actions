@@ -12,9 +12,6 @@ inputs:
   project-name:
     description: Name of project to be created on deploy node (server)
     required: true
-  docker-image-url:
-    description: Publish Dockerfile via docker-compose onto node (server)
-    required: true
     
 runs:
   using: "composite"
