@@ -38,20 +38,20 @@ runs:
       with:
         registry: ${{ inputs.docker-registry-url }}
         username: ${{ inputs.docker-username }}
-        password: $GITHUB_DOCKER_PAT
+        password: ${{ inputs.docker-pat }}
 
     - name: Build Docker Image
       shell: bash
       env:
-        DOCKER_GITHUB_REGISTRY_URL: ${{ inputs.docker-image-url }}
+        DOCKER_GITHUB_IMAGE_URL: ${{ inputs.docker-image-url }}
         DOCKER_GITHUB_ACCESS_TOKEN: ${{ inputs.docker-pat }}
         DOCKER_GITHUB_USERNAME: ${{ inputs.docker-username }}
       run: |
         ls -lah
         echo "Docker buildx"
-        docker buildx build --platform linux/arm64 --tag $DOCKER_GITHUB_REGISTRY_URL -f cicd/Dockerfile .
+        docker buildx build --platform linux/arm64 --tag ${{ inputs.docker-image-url }} -f cicd/Dockerfile .
         echo "Docker push"
-        docker push $DOCKER_GITHUB_REGISTRY_URL
+        docker push ${{ inputs.docker-image-url }}
         docker logout
 
     - name: Test
