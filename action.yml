@@ -26,7 +26,7 @@ runs:
         node-version: ${{ inputs.node-version }}
         
     - name: Install dependencies
-      shell: shell
+      shell: bash
       run: |
         cd ${{ inputs.project-path }}
         ls -lah
@@ -41,7 +41,7 @@ runs:
         password: ${{ inputs.docker-pat }}
 
     - name: Build Docker Image
-      shell: shell
+      shell: bash
       env:
         DOCKER_GITHUB_REGISTRY_URL: ${{ inputs.docker-image-url }}
         DOCKER_GITHUB_ACCESS_TOKEN: ${{ inputs.docker-pat }}
@@ -55,7 +55,7 @@ runs:
         docker logout
 
     - name: Test
-      shell: shell
+      shell: bash
       run: |
         ls -la
         node -v
