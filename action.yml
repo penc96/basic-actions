@@ -26,7 +26,7 @@ runs:
         node-version: ${{ inputs.node-version }}
         
     - name: Install dependencies
-      shell: sh
+      shell: shell
       run: |
         cd ${{ inputs.project-path }}
         ls -lah
@@ -34,6 +34,7 @@ runs:
         npm run build
 
     - name: Login to GitHub Container Registry
+      shell: shell
       uses: docker/login-action@v1
       with:
         registry: ${{ inputs.docker-registry-url }}
@@ -41,6 +42,7 @@ runs:
         password: ${{ secrets[inputs.docker-pat-name] }}
 
     - name: Build Docker Image
+      shell: shell
       env:
         DOCKER_GITHUB_REGISTRY_URL: ${{ inputs.docker-image-url }}
         DOCKER_GITHUB_ACCESS_TOKEN: ${{ secrets[inputs.docker-pat-name] }}
@@ -54,7 +56,7 @@ runs:
         docker logout
 
     - name: Test
-      shell: sh
+      shell: shell
       run: |
         ls -la
         node -v
