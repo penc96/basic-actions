@@ -1,7 +1,7 @@
 
-name: 'Build react app'
+name: 'Build react app and push to docker registry'
 
-description: 'Build a react app with specified paths'
+description: 'Build a react app with specified paths and build and push it into the given registry'
 
 input:
   node-version:
