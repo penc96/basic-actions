@@ -7,18 +7,8 @@ input:
   node-version:
 
 runs:
-  using: "ubuntu-latest"
+  using: "composite"
   steps:
-    - name: Setup node
-        uses: actions/setup-node@v3
-        with:
-          node-version: '14.x'
-
-    - name: Checkout master
-      uses: actions/checkout@master
-        with:
-          ref: ${{ github.ref }}
-
     - name: Test
     - run: ls -la
       shell: bash 
