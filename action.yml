@@ -10,5 +10,5 @@ runs:
   using: "composite"
   steps:
     - name: Test
-    - run: ls -la
+      run: ls -la
       shell: bash 
