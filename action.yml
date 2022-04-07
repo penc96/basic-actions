@@ -38,13 +38,13 @@ runs:
       with:
         registry: ${{ inputs.docker-registry-url }}
         username: ${{ inputs.docker-username }}
-        password: ${{ inputs.docker-pat }}
+        password: $GITHUB_DOCKER_PAT
 
     - name: Build Docker Image
       shell: bash
       env:
         DOCKER_GITHUB_REGISTRY_URL: ${{ inputs.docker-image-url }}
-        DOCKER_GITHUB_ACCESS_TOKEN: ${{ secrets.GITHUB_DOCKER_ACCESS_TOKEN }}
+        DOCKER_GITHUB_ACCESS_TOKEN: $GITHUB_DOCKER_PAT
         DOCKER_GITHUB_USERNAME: ${{ inputs.docker-username }}
       run: |
         ls -lah
