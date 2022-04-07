@@ -12,7 +12,7 @@ input:
     description: Url to save Docker images
   docker-username:
     description: Username to login
-  docker-pat-name:
+  docker-pat:
     description: Auth token from secrets
   docker-image-url:
     description: Url to push image to (with version tag like :latest)
@@ -38,13 +38,13 @@ runs:
       with:
         registry: ${{ inputs.docker-registry-url }}
         username: ${{ inputs.docker-username }}
-        password: ${{ secrets[inputs.docker-pat-name] }}
+        password: ${{ inputs.docker-pat }}
 
     - name: Build Docker Image
       shell: shell
       env:
         DOCKER_GITHUB_REGISTRY_URL: ${{ inputs.docker-image-url }}
-        DOCKER_GITHUB_ACCESS_TOKEN: ${{ secrets[inputs.docker-pat-name] }}
+        DOCKER_GITHUB_ACCESS_TOKEN: ${{ inputs.docker-pat }}
         DOCKER_GITHUB_USERNAME: ${{ inputs.docker-username }}
       run: |
         ls -lah
