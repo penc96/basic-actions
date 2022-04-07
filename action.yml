@@ -6,16 +6,22 @@ description: 'Build a react app with specified paths'
 input:
   node-version:
     description: Selected node version
+    required: true
   project-path:
     description: Path to React project ('package.json')
+    required: true
   docker-registry-url:
     description: Url to save Docker images
+    required: true
   docker-username:
     description: Username to login
+    required: true
   docker-pat:
     description: Auth token from secrets
+    required: true
   docker-image-url:
     description: Url to push image to (with version tag like :latest)
+    required: true
     
 runs:
   using: "composite"
