@@ -6,6 +6,16 @@ description: 'Build a react app with specified paths'
 input:
   node-version:
     description: Selected node version
+  project-path:
+    description: Path to React project ('package.json')
+  docker-registry-url:
+    description: Url to save Docker images
+  docker-username:
+    description: Username to login
+  docker-pat-name:
+    description: Auth token from secrets
+  docker-image-url:
+    description: Url to push image to (with version tag like :latest)
     
 runs:
   using: "composite"
@@ -20,7 +30,27 @@ runs:
       run: |
         cd ${{ inputs.project-path }}
         npm i && npm run build
-        
+
+    - name: Login to GitHub Container Registry
+      uses: docker/login-action@v1
+      with:
+        registry: ${{ inputs.docker-registry-url }}
+        username: ${{ inputs.docker-username }}
+        password: ${{ secrets[inputs.docker-pat-name] }}
+
+    - name: Build Docker Image
+      env:
+        DOCKER_GITHUB_REGISTRY_URL: ${{ inputs.docker-image-url }}
+        DOCKER_GITHUB_ACCESS_TOKEN: ${{ secrets[inputs.docker-pat-name] }}
+        DOCKER_GITHUB_USERNAME: ${{ inputs.docker-username }}
+      run: |
+        ls -lah
+        echo "Docker buildx"
+        docker buildx build --platform linux/arm64 --tag $DOCKER_GITHUB_REGISTRY_URL -f cicd/Dockerfile .
+        echo "Docker push"
+        docker push $DOCKER_GITHUB_REGISTRY_URL
+        docker logout
+
     - name: Test
       shell: sh
       run: |
