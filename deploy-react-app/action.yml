@@ -1,0 +1,32 @@
+
+name: Deploy docker image onto node (server)
+description: Deploy docker image from given registry onto self-hosted node (server)
+
+inputs:
+  root-dir:
+    description: Absolute path to root project directory
+    default: '/home/pi'
+  env-name:
+    description: Target environment name
+    required: true
+  project-name:
+    description: Name of project to be created on deploy node (server)
+    required: true
+  docker-image-url:
+    description: Publish Dockerfile via docker-compose onto node (server)
+    required: true
+    
+runs:
+  using: "composite"
+  steps:
+    - name: Execute cicd from folder
+      shell: bash
+      env:
+        PROJECT_PATH: ${{ inputs.root-dir }}/environment/${{ inputs.env-name }}/${{ github.project-name }}
+      runs: |
+        ls -lah
+        mkdir -p $PROJECT_PATH
+        cp -r cicd/* $PROJECT_PATH
+        cd $PROJECT_PATH
+        sudo docker-compose pull && sudo docker-compose up -d --remove-orphans && sudo docker-compose logs
+        
