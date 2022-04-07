@@ -16,13 +16,13 @@ runs:
         node-version: ${{ inputs.node-version }}
         
     - name: Install dependencies
-      shell: bash
+      shell: sh
       run: |
         cd ${{ inputs.project-path }}
         npm i && npm run build
         
     - name: Test
-      shell: bash
+      shell: sh
       run: |
         ls -la
         node -v
