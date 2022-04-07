@@ -20,7 +20,7 @@ runs:
       shell: bash
       env:
         PROJECT_PATH: ${{ inputs.root-dir }}/environment/${{ inputs.env-name }}/${{ github.project-name }}
-      runs: |
+      run: |
         ls -lah
         mkdir -p $PROJECT_PATH
         cp -r cicd/* $PROJECT_PATH
