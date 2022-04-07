@@ -60,9 +60,3 @@ runs:
         docker push ${{ inputs.docker-image-url }}
         docker logout
 
-    - name: Test
-      shell: bash
-      run: |
-        ls -la
-        node -v
-        npm -v
