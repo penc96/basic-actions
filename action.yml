@@ -13,8 +13,13 @@ runs:
     - name: Setup node 
       uses: actions/setup-node@v1
       with:
-        node-version: '14.x'
-          
+        node-version: inputs.node-version
+        
+    - name: Install dependencies
+      run: |
+        cd ${{ inputs.project-path }}
+        npm i && npm run build
+        
     - name: Test
       shell: bash
       run: |
