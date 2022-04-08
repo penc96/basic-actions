@@ -25,8 +25,8 @@ runs:
         ls -lah
         echo "mkdir -p $PROJECT_PATH"
         mkdir -p $PROJECT_PATH
-        echo "cp -r ./cicd/. $PROJECT_PATH/"
-        cp -r ./cicd/* $PROJECT_PATH
+        echo "cp -r ./cicd $PROJECT_PATH/"
+        cp -r ./cicd $PROJECT_PATH
         echo "cd $PROJECT_PATH"
         cd $PROJECT_PATH
         sudo docker-compose pull && sudo docker-compose up -d --remove-orphans && sudo docker-compose logs
