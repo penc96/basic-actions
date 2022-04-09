@@ -47,5 +47,5 @@ runs:
         echo "dotnet restore"
         dotnet restore
         echo "dotnet publish --self-contained --configuration Release --output ${{ inputs.dotnet-output-dir }} --framework ${{ inputs.dotnet-target-framework }} --runtime ${{ inputs.dotnet-target-runtime }} ${{ inputs.project-name }}"
-        dotnet publish --configuration Release --output ${{ inputs.dotnet-output-dir }} --framework ${{ inputs.dotnet-target-framework }} --runtime ${{ inputs.dotnet-target-runtime }} ${{ inputs.project-name }}
+        dotnet publish --configuration Release --output ${{ inputs.dotnet-output-dir }} --framework ${{ inputs.dotnet-target-framework }} --runtime ${{ inputs.dotnet-target-runtime }} ${{ inputs.project-name }} ${{ inputs.params }}
     
