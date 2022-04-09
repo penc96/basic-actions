@@ -38,6 +38,7 @@ runs:
         dotnet-version: ${{ inputs.dotnet-version }}
     
     - name: Build .NET
+      shell: bash # TODO: could be shell? why?
       run: |
         echo "ls -lah"
         ls -lah
