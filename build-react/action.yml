@@ -1,0 +1,27 @@
+
+name: Build app files on (target) environment into output directory
+
+inputs:
+  node-version:
+    description: Selected node version
+    required: true
+    
+  project-path:
+    description: Path to React project ('package.json')
+    required: true
+
+runs:
+  using: "composite"
+  steps:
+    - name: Setup node 
+      uses: actions/setup-node@v1
+      with:
+        node-version: ${{ inputs.node-version }}
+        
+    - name: Install & Build
+      shell: bash # TODO: could be shell? why?
+      run: | # TODO: specify build for target environment
+        cd ${{ inputs.project-path }}
+        ls -lah
+        npm i
+        npm run build

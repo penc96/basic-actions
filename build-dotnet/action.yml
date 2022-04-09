@@ -1,0 +1,23 @@
+
+name: Build target .NET project with target .NET version
+
+inputs:
+  dotnet-version:
+    description: Target build output dotnet version
+    required: true
+
+  project-name:
+    description: Target project file to execute
+    required: true
+
+  project-path:
+    description: Path from root / to folder where project-name lives
+    required: true
+
+  params:
+    description: Additional params
+
+runs:
+  using: 'composite'
+  steps:
+    - name: Build .NET

@@ -1,24 +1,21 @@
 
-name: 'Build react app and push to docker registry'
+name: 'Build target Docker file and Push to docker registry'
 
 description: 'Build a react app with specified paths and build and push it into the given registry'
 
 input:
-  node-version:
-    description: Selected node version
-    required: true
-  project-path:
-    description: Path to React project ('package.json')
-    required: true
   docker-registry-url:
     description: Url to save Docker images
     required: true
+
   docker-username:
     description: Username to login
     required: true
+
   docker-pat:
     description: Auth token from secrets
     required: true
+    
   docker-image-url:
     description: Url to push image to (with version tag like :latest)
     required: true
@@ -26,19 +23,6 @@ input:
 runs:
   using: "composite"
   steps:
-    - name: Setup node 
-      uses: actions/setup-node@v1
-      with:
-        node-version: ${{ inputs.node-version }}
-        
-    - name: Install dependencies
-      shell: bash
-      run: |
-        cd ${{ inputs.project-path }}
-        ls -lah
-        npm i
-        npm run build
-
     - name: Login to GitHub Container Registry
       uses: docker/login-action@v1
       with:
@@ -47,7 +31,7 @@ runs:
         password: ${{ inputs.docker-pat }}
 
     - name: Build Docker Image
-      shell: bash
+      shell: bash # TODO: could be shell? why?
       env:
         DOCKER_GITHUB_IMAGE_URL: ${{ inputs.docker-image-url }}
         DOCKER_GITHUB_ACCESS_TOKEN: ${{ inputs.docker-pat }}
