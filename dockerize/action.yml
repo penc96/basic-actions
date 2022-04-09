@@ -4,6 +4,10 @@ name: 'Build target Docker file and Push to docker registry'
 description: 'Build a react app with specified paths and build and push it into the given registry'
 
 input:
+  docker-filename:
+    description: Filename of target Dockerfile to be executed
+    default: Dockerfile
+
   docker-registry-url:
     description: Url to save Docker images
     required: true
@@ -15,7 +19,7 @@ input:
   docker-pat:
     description: Auth token from secrets
     required: true
-    
+
   docker-image-url:
     description: Url to push image to (with version tag like :latest)
     required: true
@@ -39,7 +43,7 @@ runs:
       run: |
         ls -lah
         echo "Docker buildx"
-        docker buildx build --platform linux/arm64 --tag ${{ inputs.docker-image-url }} -f cicd/Dockerfile .
+        docker buildx build --platform linux/arm64 --tag ${{ inputs.docker-image-url }} -f cicd/${{ inputs.docker-filename }} .
         echo "Docker push"
         docker push ${{ inputs.docker-image-url }}
         docker logout
