@@ -6,6 +6,18 @@ inputs:
     description: Target build output dotnet version
     required: true
 
+  dotnet-output-dir:
+    description: Output directory of published files
+    default: './out'
+  
+  dotnet-target-framework:
+    description: Target framework to build against
+    required: true
+    
+  dotnet-target-runtime:
+    description: Target runtime to run the app on
+    required: true
+
   project-name:
     description: Target project file to execute
     required: true
@@ -20,4 +32,19 @@ inputs:
 runs:
   using: 'composite'
   steps:
+    - name: Setup .NET environment
+      uses: actions/setup-dotnet@v2
+      with:
+        dotnet-version: ${{ inputs.dotnet-version }}
+    
     - name: Build .NET
+      run: |
+        echo "ls -lah"
+        ls -lah
+        echo "cd ${{ inputs.project-path }}"
+        cd ${{ inputs.project-path }}
+        echo "dotnet restore"
+        dotnet restore
+        echo "dotnet publish --self-contained --configuration Release --output ${{ inputs.dotnet-output-dir }} --framework ${{ inputs.dotnet-target-framework }} --runtime ${{ inputs.dotnet-target-runtime }} ${{ inputs.project-name }}"
+        dotnet publish --self-contained --configuration Release --output ${{ inputs.dotnet-output-dir }} --framework ${{ inputs.dotnet-target-framework }} --runtime ${{ inputs.dotnet-target-runtime }} ${{ inputs.project-name }}
+    
