@@ -1,0 +1,8 @@
+
+# build android project for production use with Fastlane
+
+## increment MAJOR.MINOR.PATCH
+
+## build process
+
+# output: app-release-bundle.abb
