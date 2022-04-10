@@ -1,0 +1,8 @@
+
+# build ios app for production via Fastlane
+
+## set MAJOR.MINOR.PATCH
+
+## archive app
+
+# output: archive of app (where is it stored?)
