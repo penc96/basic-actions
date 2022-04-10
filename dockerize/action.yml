@@ -44,10 +44,12 @@ runs:
         DOCKER_GITHUB_ACCESS_TOKEN: ${{ inputs.docker-pat }}
         DOCKER_GITHUB_USERNAME: ${{ inputs.docker-username }}
       run: |
+        echo "ls -lah"
         ls -lah
-        echo "Docker buildx"
+        echo "docker buildx build --platform ${{ inputs.docker-arch-platform }} --tag ${{ inputs.docker-image-url }} -f cicd/${{ inputs.docker-filename }} ."
         docker buildx build --platform ${{ inputs.docker-arch-platform }} --tag ${{ inputs.docker-image-url }} -f cicd/${{ inputs.docker-filename }} .
-        echo "Docker push"
+        echo "docker push ${{ inputs.docker-image-url }}"
         docker push ${{ inputs.docker-image-url }}
+        echo "docker logout"
         docker logout
 
