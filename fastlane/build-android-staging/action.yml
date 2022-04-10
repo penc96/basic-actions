@@ -1,0 +1,8 @@
+
+# build android app for test use (internal, alpha, beta) using fastlane
+
+## increment version
+
+## build app
+
+## output: app-release-bundle.abb
