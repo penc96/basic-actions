@@ -3,7 +3,7 @@ name: 'Build target Docker file and Push to docker registry'
 
 description: 'Build a react app with specified paths and build and push it into the given registry'
 
-input:
+inputs:
   docker-filename:
     description: Filename of target Dockerfile to be executed
     default: Dockerfile
