@@ -23,6 +23,10 @@ input:
   docker-image-url:
     description: Url to push image to (with version tag like :latest)
     required: true
+
+  docker-arch-platform:
+    description: Platform architecture where the image is executed (For more see the official Docker webpage)
+    default: linux/arm
     
 runs:
   using: "composite"
@@ -37,13 +41,12 @@ runs:
     - name: Build Docker Image
       shell: bash # TODO: could be shell? why?
       env:
-        DOCKER_GITHUB_IMAGE_URL: ${{ inputs.docker-image-url }}
         DOCKER_GITHUB_ACCESS_TOKEN: ${{ inputs.docker-pat }}
         DOCKER_GITHUB_USERNAME: ${{ inputs.docker-username }}
       run: |
         ls -lah
         echo "Docker buildx"
-        docker buildx build --platform linux/arm64 --tag ${{ inputs.docker-image-url }} -f cicd/${{ inputs.docker-filename }} .
+        docker buildx build --platform ${{ inputs.docker-arch-platform }} --tag ${{ inputs.docker-image-url }} -f cicd/${{ inputs.docker-filename }} .
         echo "Docker push"
         docker push ${{ inputs.docker-image-url }}
         docker logout
