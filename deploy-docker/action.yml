@@ -19,7 +19,7 @@ runs:
     - name: Execute cicd from folder
       shell: bash
       env:
-        PROJECT_PATH: ${{ inputs.root-dir }}/environment/${{ inputs.env-name }}/${{ inputs.project-name }}
+        PROJECT_PATH: ${{ inputs.root-dir }}environment/${{ inputs.env-name }}/${{ inputs.project-name }}
       run: |
         echo $PROJECT_PATH
         ls -lah
