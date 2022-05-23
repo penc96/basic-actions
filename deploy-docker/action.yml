@@ -29,5 +29,5 @@ runs:
         cp -rf ./cicd $PROJECT_PATH
         echo "cd $PROJECT_PATH"
         cd $PROJECT_PATH/cicd
-        sudo docker-compose pull && sudo docker-compose -p $(basename "$(cd .. && pwd)") up -d && sudo docker-compose logs
+        sudo docker-compose pull && sudo docker-compose down --rmi all && sudo docker-compose -p $(basename "$(cd .. && pwd)") up -d && sudo docker-compose logs
         
