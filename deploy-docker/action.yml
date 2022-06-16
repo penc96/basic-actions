@@ -12,7 +12,7 @@ inputs:
   project-name:
     description: Name of project to be created on deploy node (server)
     required: true
-    
+
 runs:
   using: "composite"
   steps:
@@ -25,9 +25,11 @@ runs:
         ls -lah
         echo "mkdir -p $PROJECT_PATH"
         mkdir -p $PROJECT_PATH
-        echo "cp -r ./cicd $PROJECT_PATH/"
-        cp -rf ./cicd $PROJECT_PATH
+        echo "cp -r ./cicd/* $PROJECT_PATH/"
+        cp -rf ./cicd/* $PROJECT_PATH
         echo "cd $PROJECT_PATH"
-        cd $PROJECT_PATH/cicd
-        sudo docker-compose down --rmi all && sudo docker-compose pull && sudo docker-compose -p $(basename "$(cd .. && pwd)") up -d && sudo docker-compose logs
-        
+        cd $PROJECT_PATH
+        echo "ls -lah"
+        ls -lah
+        sudo docker-compose down --rmi all && sudo docker-compose pull && sudo docker-compose up -d && sudo docker-compose logs
+
