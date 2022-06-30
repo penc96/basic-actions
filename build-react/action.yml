@@ -25,4 +25,5 @@ runs:
         ls -lah
         npm i
         npm i react-scripts -g
+        npm i sass -g
         npm run build
