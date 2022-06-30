@@ -24,5 +24,5 @@ runs:
         cd ${{ inputs.project-path }}
         ls -lah
         npm i
-        npm i react-script -g
+        npm i react-scripts -g
         npm run build
