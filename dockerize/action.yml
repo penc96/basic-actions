@@ -46,7 +46,7 @@ runs:
         DOCKER_GITHUB_USERNAME: ${{ inputs.docker-username }}
       with:
         arch: armv7
-        distro: ubuntu-latest
+        distro: ubuntu_latest
         shell: /bin/bash # TODO: could be shell? why?
         run: |
           echo "ls -lah"
