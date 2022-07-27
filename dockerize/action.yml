@@ -41,13 +41,13 @@ runs:
     - uses: uraimo/run-on-arch-action@v2
       name: Build Docker Image
       id: runcmd
+      env:
+        DOCKER_GITHUB_ACCESS_TOKEN: ${{ inputs.docker-pat }}
+        DOCKER_GITHUB_USERNAME: ${{ inputs.docker-username }}
       with:
         arch: armv7
         distro: ubuntu-latest
         shell: /bin/bash # TODO: could be shell? why?
-        env:
-          DOCKER_GITHUB_ACCESS_TOKEN: ${{ inputs.docker-pat }}
-          DOCKER_GITHUB_USERNAME: ${{ inputs.docker-username }}
         run: |
           echo "ls -lah"
           ls -lah
