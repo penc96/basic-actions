@@ -38,20 +38,25 @@ runs:
         username: ${{ inputs.docker-username }}
         password: ${{ inputs.docker-pat }}
 
-    - name: Build Docker Image
-      shell: bash # TODO: could be shell? why?
-      env:
-        DOCKER_GITHUB_ACCESS_TOKEN: ${{ inputs.docker-pat }}
-        DOCKER_GITHUB_USERNAME: ${{ inputs.docker-username }}
-      run: |
-        echo "ls -lah"
-        ls -lah
-        uname -a
-        uname -m
-        echo "docker buildx build --platform ${{ inputs.docker-arch-platform }} --tag ${{ inputs.docker-image-url }} -f cicd/${{ inputs.docker-filename }} ."
-        docker buildx build --platform ${{ inputs.docker-arch-platform }} --tag ${{ inputs.docker-image-url }} -f cicd/${{ inputs.docker-filename }} .
-        echo "docker push ${{ inputs.docker-image-url }}"
-        docker push ${{ inputs.docker-image-url }}
-        echo "docker logout"
-        docker logout
+    - uses: uraimo/run-on-arch-action@v2
+      name: Build Docker Image
+      id: runcmd
+      with:
+        arch: armv7
+        distro: ubuntu-latest
+        shell: /bin/bash # TODO: could be shell? why?
+        env:
+          DOCKER_GITHUB_ACCESS_TOKEN: ${{ inputs.docker-pat }}
+          DOCKER_GITHUB_USERNAME: ${{ inputs.docker-username }}
+        run: |
+          echo "ls -lah"
+          ls -lah
+          uname -a
+          uname -m
+          echo "docker buildx build --platform ${{ inputs.docker-arch-platform }} --tag ${{ inputs.docker-image-url }} -f cicd/${{ inputs.docker-filename }} ."
+          docker buildx build --platform ${{ inputs.docker-arch-platform }} --tag ${{ inputs.docker-image-url }} -f cicd/${{ inputs.docker-filename }} .
+          echo "docker push ${{ inputs.docker-image-url }}"
+          docker push ${{ inputs.docker-image-url }}
+          echo "docker logout"
+          docker logout
 
