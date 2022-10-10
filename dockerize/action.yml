@@ -1,7 +1,9 @@
+name: "Build target Docker file and Push to docker registry"
 
-name: 'Build target Docker file and Push to docker registry'
+description: "Build a react app with specified paths and build and push it into the given registry"
 
-description: 'Build a react app with specified paths and build and push it into the given registry'
+# TODOS:
+# -
 
 inputs:
   docker-filename:
@@ -26,8 +28,8 @@ inputs:
 
   docker-arch-platform:
     description: Platform architecture where the image is executed (For more see the official Docker webpage)
-    default: 'linux/arm'
-    
+    default: "linux/arm"
+
 runs:
   using: "composite"
   steps:
@@ -39,7 +41,7 @@ runs:
         password: ${{ inputs.docker-pat }}
 
     - name: Build Docker Image
-      shell: bash # TODO: could be shell? why?
+      shell: bash
       env:
         DOCKER_GITHUB_ACCESS_TOKEN: ${{ inputs.docker-pat }}
         DOCKER_GITHUB_USERNAME: ${{ inputs.docker-username }}
@@ -52,4 +54,3 @@ runs:
         docker push ${{ inputs.docker-image-url }}
         echo "docker logout"
         docker logout
-

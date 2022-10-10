@@ -1,0 +1,14 @@
+name: Deploy .NET nupkg to nuget repository
+
+description: Deploy .NET nupkg to nuget repository
+
+# TODOS:
+# -
+
+runs:
+  using: "composite"
+  steps:
+    - name: Setup .NET environment
+      uses: actions/setup-dotnet@v2
+      with:
+        dotnet-version: ${{ inputs.dotnet-version }}

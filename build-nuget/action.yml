@@ -1,4 +1,4 @@
-name: Build target .NET project with target .NET version
+name: Build nupkg from .NET library project
 
 description: Create a .NET release build output
 
@@ -41,15 +41,3 @@ runs:
       uses: actions/setup-dotnet@v2
       with:
         dotnet-version: ${{ inputs.dotnet-version }}
-
-    - name: Build .NET
-      shell: bash
-      run: |
-        echo "ls -lah"
-        ls -lah
-        echo "cd ${{ inputs.project-path }}"
-        cd ${{ inputs.project-path }}
-        echo "dotnet restore"
-        dotnet restore
-        echo "dotnet publish --self-contained --configuration Release --output ${{ inputs.dotnet-output-dir }} --framework ${{ inputs.dotnet-target-framework }} --runtime ${{ inputs.dotnet-target-runtime }} ${{ inputs.project-name }}"
-        dotnet publish --configuration Release --output ${{ inputs.dotnet-output-dir }} --framework ${{ inputs.dotnet-target-framework }} --runtime ${{ inputs.dotnet-target-runtime }} ${{ inputs.project-name }} ${{ inputs.params }}
