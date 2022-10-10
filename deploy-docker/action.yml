@@ -1,18 +1,21 @@
-
 name: Deploy docker image onto node (server)
+
 description: Deploy docker image from given registry onto self-hosted node (server)
+
+# TODOS:
+# -
 
 inputs:
   root-dir:
     description: Absolute path to root project directory
-    default: '/home/pi'
+    default: "/home"
   env-name:
     description: Target environment name
     required: true
   project-name:
     description: Name of project to be created on deploy node (server)
     required: true
-    
+
 runs:
   using: "composite"
   steps:
@@ -29,5 +32,4 @@ runs:
         cp -rf ./cicd $PROJECT_PATH
         echo "cd $PROJECT_PATH"
         cd $PROJECT_PATH/cicd
-        sudo docker-compose pull && sudo docker-compose -p $(basename "$(cd .. && pwd)") up -d && sudo docker-compose logs
-        
+        docker-compose pull && docker-compose up -d && sudo docker-compose logs
