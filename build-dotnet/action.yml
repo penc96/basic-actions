@@ -9,11 +9,11 @@ inputs:
   dotnet-output-dir:
     description: Output directory of published files
     default: './out'
-  
+
   dotnet-target-framework:
     description: Target framework to build against
     required: true
-    
+
   dotnet-target-runtime:
     description: Target runtime to run the app on
     required: true
@@ -36,7 +36,8 @@ runs:
       uses: actions/setup-dotnet@v2
       with:
         dotnet-version: ${{ inputs.dotnet-version }}
-    
+        
+
     - name: Build .NET
       shell: bash # TODO: could be shell? why?
       run: |
@@ -46,6 +47,6 @@ runs:
         cd ${{ inputs.project-path }}
         echo "dotnet restore"
         dotnet restore
-        echo "dotnet publish --self-contained --configuration Release --output ${{ inputs.dotnet-output-dir }} --framework ${{ inputs.dotnet-target-framework }} --runtime ${{ inputs.dotnet-target-runtime }} ${{ inputs.project-name }}"
+        echo "dotnet publish --configuration Release --output ${{ inputs.dotnet-output-dir }} --framework ${{ inputs.dotnet-target-framework }} --runtime ${{ inputs.dotnet-target-runtime }} ${{ inputs.project-name }}"
         dotnet publish --configuration Release --output ${{ inputs.dotnet-output-dir }} --framework ${{ inputs.dotnet-target-framework }} --runtime ${{ inputs.dotnet-target-runtime }} ${{ inputs.project-name }} ${{ inputs.params }}
-    
+
