@@ -28,7 +28,7 @@ runs:
         echo "mkdir -p $PROJECT_PATH"
         mkdir -p $PROJECT_PATH
         echo "cp -r ./cicd $PROJECT_PATH/"
-        cp -rf ./cicd $PROJECT_PATH
+        cp -rf ./cicd/* $PROJECT_PATH
         echo "cd $PROJECT_PATH"
-        cd $PROJECT_PATH/cicd
+        cd $PROJECT_PATH
         docker-compose pull && docker-compose down && docker-compose up -d && sudo docker-compose logs
