@@ -31,4 +31,4 @@ runs:
         cp -rf ./cicd/* $PROJECT_PATH
         echo "cd $PROJECT_PATH"
         cd $PROJECT_PATH
-        docker-compose pull && docker-compose down && docker-compose up -d && sudo docker-compose logs
+        docker-compose pull && docker-compose down && docker-compose up -d && docker-compose logs
