@@ -52,6 +52,4 @@ runs:
         docker buildx build --platform ${{ inputs.docker-arch-platform }} --tag ${{ inputs.docker-image-url }} -f cicd/${{ inputs.docker-filename }} .
         echo "docker push ${{ inputs.docker-image-url }}"
         docker push ${{ inputs.docker-image-url }}
-        echo "docker logout"
-        docker logout
 
