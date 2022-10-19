@@ -31,5 +31,5 @@ runs:
         cd $PROJECT_PATH
         echo "ls -lah"
         ls -lah
-        sudo docker-compose down --rmi all && sudo docker-compose pull && sudo docker-compose up -d && sudo docker-compose logs
+        docker-compose down --rmi all && docker-compose pull && docker-compose up -d && docker-compose logs
 
