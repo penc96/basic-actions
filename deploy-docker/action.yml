@@ -1,11 +1,13 @@
-
 name: Deploy docker image onto node (server)
 description: Deploy docker image from given registry onto self-hosted node (server)
+
+# TODOS:
+# -
 
 inputs:
   root-dir:
     description: Absolute path to root project directory
-    default: '/home/pi'
+    default: "/home"
   env-name:
     description: Target environment name
     required: true
@@ -25,11 +27,10 @@ runs:
         ls -lah
         echo "mkdir -p $PROJECT_PATH"
         mkdir -p $PROJECT_PATH
-        echo "cp -r ./cicd/* $PROJECT_PATH/"
+        echo "cp -r ./cicd $PROJECT_PATH/"
         cp -rf ./cicd/* $PROJECT_PATH
         echo "cd $PROJECT_PATH"
         cd $PROJECT_PATH
         echo "ls -lah"
         ls -lah
-        docker-compose down --rmi all && docker-compose pull && docker-compose up -d && docker-compose logs
-
+        docker-compose pull && docker-compose up -d && docker-compose logs
