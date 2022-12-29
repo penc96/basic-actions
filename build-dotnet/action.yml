@@ -36,7 +36,7 @@ runs:
       uses: actions/setup-dotnet@v2
       with:
         dotnet-version: ${{ inputs.dotnet-version }}
-        
+
 
     - name: Build .NET
       shell: bash # TODO: could be shell? why?
@@ -46,7 +46,7 @@ runs:
         echo "cd ${{ inputs.project-path }}"
         cd ${{ inputs.project-path }}
         echo "dotnet restore"
-        dotnet restore
+        sudo dotnet restore
         echo "dotnet publish --configuration Release --output ${{ inputs.dotnet-output-dir }} --framework ${{ inputs.dotnet-target-framework }} --runtime ${{ inputs.dotnet-target-runtime }} ${{ inputs.project-name }}"
-        dotnet publish --configuration Release --output ${{ inputs.dotnet-output-dir }} --framework ${{ inputs.dotnet-target-framework }} --runtime ${{ inputs.dotnet-target-runtime }} ${{ inputs.project-name }} ${{ inputs.params }}
+        sudo dotnet publish --configuration Release --output ${{ inputs.dotnet-output-dir }} --framework ${{ inputs.dotnet-target-framework }} --runtime ${{ inputs.dotnet-target-runtime }} ${{ inputs.project-name }} ${{ inputs.params }}
 
